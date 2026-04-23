@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { store } from '@/store/store';
+import { logout } from '@/store/authSlice';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:5000/api',
@@ -10,7 +12,7 @@ const axiosInstance = axios.create({
 // Attach JWT token to every request automatically
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = store.getState().auth.token;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,8 +26,7 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      store.dispatch(logout());
       window.location.href = '/login';
     }
     return Promise.reject(error);

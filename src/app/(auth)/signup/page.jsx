@@ -12,6 +12,8 @@ import Toast from '@/components/ui/Toast';
 import { useToast } from '@/hooks/useToast';
 import { registerApi } from '../../api/authApi';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '@/store/authSlice';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -27,6 +29,7 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const { toast, showToast, hideToast } = useToast();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const description = "INDUS Is A Unified Platform For Your Equity Investment Monitoring With Multiple Self-Help Features.";
 
@@ -64,9 +67,7 @@ export default function SignupPage() {
         role: 'client',
       });
 
-      // Save token and user to localStorage
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      dispatch(setCredentials({ token: response.data.token, user: response.data.user }));
 
       showToast('Account created successfully!', 'success');
 

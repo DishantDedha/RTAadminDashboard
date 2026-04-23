@@ -3,6 +3,7 @@ import "./globals.css";
 import Image from "next/image";
 import { Home } from "lucide-react";
 import Link from "next/link";
+import ReduxProvider from "@/components/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,15 +34,15 @@ export default function RootLayout({ children }) {
               <Image
                 src="/logo.jpeg"
                 alt="KFINTCH Logo"
-                width={140}
-                height={40}
-                className="h-9 w-auto"
+                width={300}
+                height={100}
+                className="h-20 w-auto"
                 priority
               />
             </div>
 
             <Link
-              href="https://kfintech.com"
+              href="/login"
               target="_blank"
               className="flex items-center justify-center w-10 h-10 hover:bg-white/10 rounded-xl transition-colors"
             >
@@ -50,9 +51,11 @@ export default function RootLayout({ children }) {
           </div>
         </nav>
 
-        <main className="pt-16 min-h-screen">
-          {children}
-        </main>
+        <ReduxProvider>
+          <main className="pt-16 min-h-screen">
+            {children}
+          </main>
+        </ReduxProvider>
       </body>
     </html>
   );

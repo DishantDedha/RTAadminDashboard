@@ -12,6 +12,8 @@ import Toast from '@/components/ui/Toast';
 import { useToast } from '@/hooks/useToast';
 import { loginApi, sendOtpApi, loginWithOtpApi } from '../../api/authApi';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '@/store/authSlice';
 
 export default function LoginPage() {
   const [useOTP, setUseOTP] = useState(false);
@@ -22,6 +24,7 @@ export default function LoginPage() {
   const [otpSent, setOtpSent] = useState(false);
   const { toast, showToast, hideToast } = useToast();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const description = "Indus Is A Unified Platform For Your Equity Investment Monitoring With Multiple Self-Help Features.";
 
@@ -71,9 +74,7 @@ export default function LoginPage() {
         response = await loginApi({ pan, password });
       }
 
-      // Save token and user to localStorage
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      dispatch(setCredentials({ token: response.data.token, user: response.data.user }));
 
       showToast('Login successful! Redirecting...', 'success');
 

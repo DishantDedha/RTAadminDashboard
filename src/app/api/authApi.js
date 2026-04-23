@@ -6,7 +6,7 @@ export const registerApi = async (formData) => {
 };
 
 export const loginApi = async ({ pan, password }) => {
-  const response = await axiosInstance.post('/auth/login', { pan, password });
+  const response = await axiosInstance.post('/auth/login', { pan, password, portalType: 'admin' });
   return response.data;
 };
 
@@ -39,3 +39,4 @@ export const getMeApi = async () => {
   const response = await axiosInstance.get('/auth/me');
   return response.data;
 };
+
