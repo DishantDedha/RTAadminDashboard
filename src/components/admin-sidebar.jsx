@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { BarChart3, FileText, Users, Settings, ClipboardList, Calendar } from 'lucide-react';
+import { BarChart3, FileText, Users, Settings, ClipboardList, Calendar, ShieldCheck  } from 'lucide-react';
 
 export default function AdminSidebar({ activeMenu, setActiveMenu }) {
   const menuItems = [
@@ -11,6 +11,7 @@ export default function AdminSidebar({ activeMenu, setActiveMenu }) {
    
     { name: 'Categories Management', icon: Users, key: 'Users' },
     { name: 'Events Management', icon: Calendar, key: 'Events-Management' },
+    { name: 'PAN Verifications', icon: ShieldCheck, key: 'PAN-Verifications' },
     { name: 'Settings', icon: Settings, key: 'Settings' },
     
   ];
@@ -18,13 +19,7 @@ export default function AdminSidebar({ activeMenu, setActiveMenu }) {
   return (
     <div className="w-72 bg-white border-r border-gray-200 p-4 hidden md:block overflow-y-auto h-screen">
       <div className="flex items-center gap-3 mb-8">
-        <Image
-          src="/logo.jpeg"
-          alt="KFINTCH Logo"
-          width={120}
-          height={36}
-          className="h-8 w-auto"
-        />
+        
         <span className="text-xl font-semibold text-dynamic">Admin Portal</span>
       </div>
 

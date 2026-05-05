@@ -10,6 +10,9 @@ import SubmissionsList from '@/components/submissions-list';
 import CategoriesManagement from '@/components/categories-management';
 import IsrFormsManagement from '@/components/isr-forms-management';
 import EventsManagement from '@/components/events-management';
+import PanVerifications from '@/components/pan-verifications';
+
+
 
 export default function AdminDashboard() {
   const [activeMenu, setActiveMenu] = useState("Dashboard");
@@ -28,6 +31,7 @@ export default function AdminDashboard() {
         {activeMenu === "Users" && <CategoriesManagement />}
         {activeMenu === "Settings" && <Settings />}
         {activeMenu === "Events-Management" && <EventsManagement />}
+        {activeMenu === "PAN-Verifications" && <PanVerifications />}
       </div>
     </div>
   );
